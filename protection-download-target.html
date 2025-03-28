@@ -1,0 +1,61 @@
+<!-- protection-download-target.html (Target Page) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Simulation with DOM XSS</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      text-align: center;
+      padding-top: 40px;
+    }
+
+    form {
+      position: relative;
+    }
+
+    #login-form input {
+      display: block;
+      margin: 10px auto;
+      padding: 8px;
+      width: 80%;
+    }
+
+    #login-form button {
+      padding: 10px 20px;
+      background: red;
+      color: white;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      opacity: 0.01;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 160px;
+      height: 40px;
+    }
+  </style>
+</head>
+<body>
+  <form id="login-form" action="#" method="post">
+    <input type="text" name="username" placeholder="Username" autocomplete="off">
+    <input type="password" name="password" placeholder="Password" autocomplete="off">
+    <button type="submit">Login</button>
+  </form>
+
+  <script>
+    // Simulated DOM XSS sink: parses location.hash unsafely
+    const params = new URLSearchParams(window.location.hash.slice(1));
+    const injected = params.get('payload');
+    if (injected) {
+      const container = document.createElement('div');
+      container.innerHTML = injected; // unsafe injection point
+      document.body.appendChild(container);
+    }
+  </script>
+</body>
+</html>

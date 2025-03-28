@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML Smuggling Test - Blob Download</title>
+</head>
+<body>
+  <h2>HTML Smuggling Test (Benign)</h2>
+  <p>This test simulates a harmless HTML smuggling technique by dropping a `.txt` file using JavaScript.</p>
+
+  <script>
+    const benignPayload = `
+      This is a harmless HTML smuggling test.
+      No malicious behavior. Just a demonstration of blob-based file creation.
+    `;
+
+    const blob = new Blob([benignPayload], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = "benign_test_payload.txt";
+    document.body.appendChild(link);
+
+    // Auto-trigger download
+    link.click();
+
+    // Clean up
+    URL.revokeObjectURL(url);
+    document.body.removeChild(link);
+  </script>
+</body>
+</html>

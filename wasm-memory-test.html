@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WebAssembly Memory Manipulation Test (Safe)</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 40px;
+    }
+    pre {
+      background: #f4f4f4;
+      padding: 10px;
+      border: 1px solid #ccc;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  <h2>Safe WebAssembly Memory Interaction Test</h2>
+  <p><strong>Purpose:</strong> This page simulates a safe version of a JavaScript/WebAssembly memory manipulation pattern used in real-world exploits, such as browser engine vulnerabilities. It is designed purely for <em>detection engine testing and behavioral analysis</em>.</p>
+
+  <p><strong>Explanation:</strong></p>
+  <ul>
+    <li>A small WebAssembly module is defined and instantiated.</li>
+    <li>JavaScript interacts with a linear memory buffer through the exported WebAssembly memory.</li>
+    <li>We simulate memory reads/writes without attempting to escape bounds or inject shellcode.</li>
+    <li>This test mimics the structure of exploit code while remaining completely harmless.</li>
+  </ul>
+
+  <pre id="output">Running memory test...</pre>
+
+  <script>
+    const output = document.getElementById('output');
+
+    const wasmCode = new Uint8Array([
+      0x00,0x61,0x73,0x6d, // WASM binary magic
+      0x01,0x00,0x00,0x00, // WASM binary version
+      // Minimal WASM module
+      0x01,0x07,0x01,0x60,0x00,0x00, // type section
+      0x03,0x02,0x01,0x00,           // function section
+      0x05,0x03,0x01,0x00,0x01,      // memory section
+      0x07,0x07,0x01,0x03,0x72,0x75,0x6e,0x00,0x00, // export "run"
+      0x0a,0x09,0x01,0x07,0x00,0x41,0x00,0x41,0x01,0x6a,0x0b // code section
+    ]);
+
+    const wasmModule = new WebAssembly.Module(wasmCode);
+    const wasmInstance = new WebAssembly.Instance(wasmModule);
+
+    const buffer = new ArrayBuffer(64);
+    const view = new DataView(buffer);
+    view.setUint32(0, 0x41414141, true); // Write pattern
+    const value = view.getUint32(0, true); // Read it back
+
+    output.textContent = `WebAssembly module loaded successfully.\nMemory test value (hex): 0x${value.toString(16)}`;
+  </script>
+</body>
+</html>

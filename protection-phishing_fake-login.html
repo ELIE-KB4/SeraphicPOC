@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Secure Login Portal</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    #alert { color: red; font-weight: bold; display: none; }
+  </style>
+</head>
+<body>
+  <h2>Microsoft 365 Login</h2>
+  <p>Sign in with your work or school account</p>
+
+  <form id="loginForm">
+    <input type="email" id="email" placeholder="Email" required><br><br>
+    <input type="password" id="password" placeholder="Password" required><br><br>
+    <button type="submit">Sign In</button>
+  </form>
+
+  <div id="alert">⚠️ Warning: This site may be impersonating a trusted brand.</div>
+
+  <script>
+    function isKnownPhishingHost() {
+      // Simulate lookalike detection (add your own logic if needed)
+      const legitDomains = ['microsoft.com', 'office.com', 'login.microsoftonline.com'];
+      const currentHost = window.location.hostname;
+
+      return !legitDomains.some(domain => currentHost.endsWith(domain));
+    }
+
+    function flagSuspiciousSite() {
+      const alertBox = document.getElementById('alert');
+      alertBox.style.display = 'block';
+
+      const warningMsg = "[PHISHING WARNING] Potential credential phishing attempt on an untrusted domain.";
+      console.warn(warningMsg);
+    }
+
+    if (isKnownPhishingHost()) {
+      document.getElementById('loginForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        flagSuspiciousSite();
+      });
+    }
+  </script>
+</body>
+</html>

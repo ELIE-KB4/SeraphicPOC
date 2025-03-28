@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML Smuggling Test - Base64 Payload</title>
+</head>
+<body>
+  <h2>HTML Smuggling Test (Base64)</h2>
+  <p>This test simulates a harmless payload encoded in Base64 and delivered via Blob.</p>
+
+  <script>
+    // Base64-encoded version of: "This is a benign test file created via base64 decoding."
+    const base64Payload = "VGhpcyBpcyBhIGJlbmlnbiB0ZXN0IGZpbGUgY3JlYXRlZCB2aWEgYmFzZTY0IGRlY29kaW5nLg==";
+
+    // Decode Base64 string to raw text
+    const decodedPayload = atob(base64Payload);
+
+    // Create a Blob from the decoded text
+    const blob = new Blob([decodedPayload], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+
+    // Create and trigger download
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = "base64_test_payload.txt";
+    document.body.appendChild(link);
+    link.click();
+
+    // Clean up
+    URL.revokeObjectURL(url);
+    document.body.removeChild(link);
+  </script>
+</body>
+</html>
