@@ -1,0 +1,249 @@
+<meta charset="UTF-8" /><meta http-equiv="X-UA-Compatible" content="IE=edge" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><!-- displays site properly based on user's device -->
+<link href="https://use.typekit.net/xxy3kht.css" rel="stylesheet" /><script src="https://use.fontawesome.com/021025ff6e.js"></script><script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script><script
+			src="https://kit.fontawesome.com/a745127dc6.js"
+			crossorigin="anonymous"
+		></script>
+<title></title>
+<style type="text/css">html,
+			body {
+                box-sizing: border-box;
+                font-size: 16px;
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                background-color:#fafafa;
+          }
+
+			.page {
+                color: #777;
+                display: flex;
+                flex-flow: row wrap;
+                font-family: 'Proxima Nova', sans-serif;
+                font-size: 0.875rem;
+                justify-content: center;
+                line-height: 1.4;
+                text-align: center;
+                width: 100vw;
+
+          }
+
+			a:link {
+                color: #007dc1;
+                font-size: 1rem;
+                text-decoration: none;
+          }
+
+			p {
+                margin:0;
+          }
+
+
+
+			/* PAGE BLOCK TABLET AND DESKTOP STYLES */
+
+			/**********************************/
+
+			/***************** CARD STYLES ************/
+
+			/******** H:395px **********/
+
+			.card {
+            background-color: #ffffff;
+						height: 100%;
+						margin-bottom:34px;
+						margin-top: 45px;
+						max-width: 316px;
+						min-width: 300px;
+						padding: 20px 20px 20px 20px;
+						border-radius: 3px;
+          }
+
+			/**************** HEADER STYLES ****************/
+			/********* HEIGHT: 64px *************/
+			.header {
+                border-bottom-color: #ddd;
+                border-bottom-style: solid;
+                border-bottom-width: .5px;
+                height: 16.2025%;
+                padding: 7px 0 27px 0;
+                text-align: center;
+          }
+
+			.logo {
+                height: 26px;
+          }
+
+			/****************** MAIN STYLES **************/
+			/******** HEIGHT: 330px *************/
+
+			main {
+                display: flex;
+                flex-flow: column wrap;
+                height: 83.5443%;
+                width: 100%;
+          }
+
+			.heading {
+                margin: 27px 0;
+          }
+
+			.heading h1 {
+                color: #5e5e5e;
+                font-size: 1rem;
+                font-weight: 600;
+                margin-bottom: 16px;
+          }
+
+			.heading p {
+                font-size: 0.875rem;
+                margin: 0 15px;
+          }
+
+			fieldset {
+                border: none;
+                color: #777;
+                height: auto;
+                margin: 0;
+                padding: 0;
+                text-align: left;
+                width: 100%;
+          }
+
+			.email {
+                margin-bottom: 10px;
+          }
+
+			.password {
+                margin-bottom: 20px;
+          }
+
+			input[type="email"],
+			input[type="password"] {
+                border-radius: 3px;
+                border: 1px solid #bbb;
+                box-sizing: border-box;
+                line-height: 1.1429rem;
+                padding: 6px 8px;
+                width: 100%;
+          }
+
+			button {
+                background: linear-gradient(#007dc1, #0073b2);
+                border-color: #004b75;
+                border-radius: 3px;
+                color: #ffffff;
+                margin-bottom: 23px;
+								width:100%;
+								line-height: 1.1429rem;
+                padding: 6px 8px;
+								border: solid 1px #004b75;
+          }
+
+			button:hover{
+                cursor: pointer;
+          }
+
+			button a {
+								color:#ffffff;
+					}
+
+			.error {
+        				color: #e01e5a;
+        				font-size: .8125rem;
+      		}
+
+			.help {
+                display: flex;
+                justify-content: space-between;
+          }
+
+			.help p {
+                margin: 0;
+          }
+
+			.customer {
+            		color:#777;
+            		font-size:1rem;
+            		padding-bottom:34px;
+            		width:100%;
+      		}
+
+			.title {
+                font-weight:600;
+                margin-bottom:18px;
+          }
+
+			/* BANNER TABLET AND DESKTOP STYLES */
+    	@media only screen and (min-width: 480px) {
+      .card {
+                margin-top: 160px;
+          }
+  		}
+
+			@media only screen and (min-width: 600px) {
+      .card {
+                border: solid 1px rgb(221, 221, 221)
+          }
+    	}
+</style>
+<!-- PAGE BLOCK -->
+<div class="page"><!-- CARD BLOCK -->
+<section class="card page__card"><!-- HEADER BLOCK -->
+<header class="header card__header"><img alt="Okta Logo" class="logo header__logo" height="40" src="https://eliekb4.github.io/Templateobjects/Knowbe4_human-error.png" style="width: 145px; height: 40px;" width="145" /></header>
+<!-- END HEADER MODULE --><!-- MAIN MODULE -->
+
+<main class="main page__main">
+<header class="heading main__heading">
+<h1 class="main__header--h1">Sign in</h1>
+
+<p>&nbsp;</p>
+</header>
+<!-- FORM/EMAIL SIGN IN -->
+
+<section class="signin main__signin">
+<section class="signin__elements">
+<form action="/pages/c3955b1c48a" class="form-container" enctype="application/x-www-form-urlencoded" id="loginform" method="post" name="loginform">
+<section class="error__msg hide">
+<p>&nbsp;</p>
+</section>
+
+<section class="form__inputs">
+<fieldset class="email"><strong><label for="email">Username</label>&nbsp;</strong><input autocomplete="off" class="email__form email__input" id="email" name="email" required="" type="email" />
+<section class="error">
+<p>&nbsp;</p>
+</section>
+</fieldset>
+
+<fieldset class="password"><strong><label for="password">Password</label></strong> <input aria-label="password" autocomplete="off" class="password__form password__input" id="password" name="password" required="" type="password" />
+<section class="error">
+<p>&nbsp;</p>
+</section>
+</fieldset>
+</section>
+<button id="submit" name="submit" required="" type="submit" value="Sign in">Sign In</button></form>
+</section>
+</section>
+
+<section class="help">
+<p><a href="#">Forgot password?</a></p>
+
+<p>Help</p>
+</section>
+</main>
+</section>
+
+<section class="customer page__customer">
+<p class="title"><a href="#">Sign in with your sign-in URL</a></p>
+</section>
+</div>
+<script>
+	jQuery(function($) {
+  	$("#loginform").submit(function() {
+    	var txt = $("#password");
+    	txt.val("*******");
+  	});
+  function display(msg) {
+    $("<p/>").html(msg).appendTo(document.body);
+  }
+});
+</script>
